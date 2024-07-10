@@ -1,56 +1,48 @@
+#!/usr/bin/python3
+
 import tkinter as tk
 from tkinter import messagebox
 
-class Course3:
+class Course4:
     def __init__(self):
         self.Q1 = 0.0
-        self.Assignment = 0.0
-        self.MD = 0.0
         self.Q2 = 0.0
+        self.Pt = 0.0
         self.Final = 0.0
         self.MARK = 0.0
         self.MARK1 = 0.0
         self.MARK2 = 0.0
         self.MARK3 = 0.0
-        self.MARK4 = 0.0
         self.AVG = 0.0
         self.X = ""
 
-    def F(self, Q1, Assignment=None, MD=None, Q2=None, Final=None):
+    def F(self, Q1, Q2=None, Pt=None, Final=None):
         self.Q1 = Q1
-        self.Assignment = Assignment if Assignment is not None else 0.0
-        self.MD = MD if MD is not None else 0.0
         self.Q2 = Q2 if Q2 is not None else 0.0
+        self.Pt = Pt if Pt is not None else 0.0
         self.Final = Final if Final is not None else 0.0
 
         # Calculate AVG based on the number of provided parameters
-        num_params = sum(1 for param in [Assignment, MD, Q2, Final] if param is not None)
+        num_params = sum(1 for param in [Q2, Pt, Final] if param is not None)
 
         if num_params == 0:
             self.MARK = self.Q1 * 10
             self.AVG = self.MARK
         elif num_params == 1:
             self.MARK = self.Q1 * 10
-            self.MARK1 = self.Assignment * 5
+            self.MARK1 = self.Q2 * 10
             self.AVG = (self.MARK + self.MARK1) / 2
         elif num_params == 2:
             self.MARK = self.Q1 * 10
-            self.MARK1 = self.Assignment * 5
-            self.MARK2 = (self.MD / 30) * 100
+            self.MARK1 = self.Q2 * 10
+            self.MARK2 = (self.Pt / 40) * 100
             self.AVG = (self.MARK + self.MARK1 + self.MARK2) / 3
         elif num_params == 3:
             self.MARK = self.Q1 * 10
-            self.MARK1 = self.Assignment * 5
-            self.MARK2 = (self.MD / 30) * 100
-            self.MARK3 = self.Q2 * 10
+            self.MARK1 = self.Q2 * 10
+            self.MARK2 = (self.Pt / 40) * 100
+            self.MARK3 = (self.Final / 40) * 100
             self.AVG = (self.MARK + self.MARK1 + self.MARK2 + self.MARK3) / 4
-        elif num_params == 4:
-            self.MARK = self.Q1 * 10
-            self.MARK1 = self.Assignment * 5
-            self.MARK2 = (self.MD / 30) * 100
-            self.MARK3 = self.Q2 * 10
-            self.MARK4 = (self.Final / 30) * 100
-            self.AVG = (self.MARK + self.MARK1 + self.MARK2 + self.MARK3 + self.MARK4) / 5
 
         return self.AVG
 
@@ -73,10 +65,9 @@ class Course3:
 
         message1 = (
             f"Quiz1: {self.Q1}\n"
-            f"Assignment: {self.Assignment}\n"
-            f"Mid term: {self.MD}\n"
             f"Quiz2: {self.Q2}\n"
-            f"Final Exam: {self.Final}\n"
+            f"Mid term: {self.Pt}\n"
+            f"Project: {self.Final}\n"
             f"AVG: {self.AVG}"
         )
         messagebox.showinfo("Course Marks", message1)
